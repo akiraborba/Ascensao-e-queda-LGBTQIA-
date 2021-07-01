@@ -1,0 +1,63 @@
+---
+title: "Ascensão e queda da nomenclatura LGBTQIA+ no Brasil"
+author: "Arthur Luna - arthurlunabcf@outlook.com"
+output: 
+  html_document: 
+    keep_md: yes
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, cache = T, message = F, warning = F, fig.align = "center", fig.height = 5, fig.width = 10)
+library(plotly)
+library(lubridate)
+```
+
+```{r}
+all.data <- list()
+for (i in 1:13) {
+    all.data[i] <- as.data.frame(read.csv(file = paste("multiTimeline(", i, ").csv", sep = ""),encoding = "Latin-1", check.names = T))
+}
+```
+
+```{r}
+dates <- as.Date("2004-01-01") + months(0:209)
+queer.rows <- vector()
+
+for(i in 1:13) {
+  new.rows <- as.vector(all.data[[i]][2:211])
+  queer.rows <- c(queer.rows, new.rows)
+  
+}
+queer.rows <- as.numeric(queer.rows)
+queer.rows[is.na(queer.rows)] <- 0
+queer.names <- c("LGBTQ", "LBGTQIA", "GLS", "Gay", "Bissexual", "Lésbica", "Transexual", "LGBT", "Travesti", "Queer", "Assexual", "Intersexual", "Não-binário")
+queer.data <- data.frame(termo.de.pesquisa = rep(queer.names, each = 210), n.buscas = queer.rows, tempo = rep(dates, times = 13) )
+```
+### Entendendo a sopa de letrinhas
+A comunidade LGBTQIA+ é um grupo dinâmico, em contante movimento e aprofundamento de suas problemáticas e bandeiras. Esse dinamismo se reflete em como o grupo se auto-denomina. Os nomes sempre são campos de disputa. Para produzir insights sobre essa fluidez dos nomes, um gráfico de popularidade de termos de pesquisa no Google Brasil foi criado.
+
+### Explore o Arco-Íris
+Você pode clicar nos termos de busca para que eles apareçam e desapareçam. Arraste o mouse com botão direito pressionado para dar zoom em determinado período de tempo. Os valores estão entre 0 e 100, sendo 100 o momento em que o termo esteve mais popular. Os dados vão de janeiro de 2004 a junho de 2021.
+```{r}
+queer.plot <- ggplot(queer.data) + 
+           geom_line(aes(x = tempo, y = n.buscas, color = termo.de.pesquisa)) +
+           labs(x = "Tempo, em meses",
+                y = "Buscas",
+                title = "Popularidade dos termos de pesquisa",
+                subtitle = "De 0 a 100, sendo 100 o pico da popularidade do termo") +
+           theme(legend.title = element_blank(), legend.position = "bottom")
+ggplotly(queer.plot)
+```
+### As cores da Moda
+Entre as siglas, GLS está em decadência desde dezembro de 2004. LGBT e LGBTQIA disputam a popularidade nesse momento. O caminho do meio, LBGTQ, está, bom, no meio. Como diria Heidi Klum, *"In fashion, one day you are in, and in the next day you are out"*.
+
+### Antes invisíveis, hoje no topo
+Grupos marginalizados dentro da comunidade LGBTQIA+ estão conquistando seu espaço. Lésbicas, Bissexuais, Assexuais, Intersexs e Não-Binários, historicamente apagados e críticos de que a sigla LGBTQIA+ é na verdade GGGGG+, nunca foram tão buscados quanto neste momento. A luta continua, mas certamente mais atenção é dada a estas pessoas da comunidade do que se dava em 2004.
+
+### O poder da representatividade
+O termo Transexual tem um comportamento muito diferente dos demais, um pico indiscutível e agudo em janeiro de 2011. Por quê? Por que em janeiro de 2011 Ariadna foi apresentada como concorrente no BBB11, a primeira transexual no programa. Nunca se buscou tanto sobre transexuais como naquela época.Para quem acha que representatividade na grande mídia não importa, bem, o Google discorda. 
+
+### Tá passada?
+Que outros padrões você vê aí nestes dados? Curtiu o bafo? Manda uma cartinha para arthurlunabcf@outlook.com ou conversa comigo no LinkedIn. Lá estou como Arthur Luna Borba.
+
