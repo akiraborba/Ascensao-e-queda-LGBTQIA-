@@ -1,0 +1,1 @@
+# Ascensao-e-queda-LGBTQIA-
