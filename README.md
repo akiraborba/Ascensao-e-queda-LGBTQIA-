@@ -60,11 +60,11 @@ em determinado período de tempo. Os valores estão entre 0 e 100, sendo
 100 o momento em que o termo esteve mais popular. Os dados vão de
 janeiro de 2004 a junho de 2021. Para melhor visualização, três gráficos foram gerados: siglas, sexualidades e gêneros.
 
-"//plotly.com/~arthurlunabcf/1.embed"
+"https://chart-studio.plotly.com/~arthurlunabcf/1.embed"
 
-"//plotly.com/~arthurlunabcf/3.embed"
+"https://chart-studio.plotly.com/~arthurlunabcf/3.embed"
 
-"//plotly.com/~arthurlunabcf/4.embed"
+"https://chart-studio.plotly.com/~arthurlunabcf/4.embed"
 
 #### As cores da Moda
 
